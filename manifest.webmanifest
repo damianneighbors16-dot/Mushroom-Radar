@@ -1,0 +1,8 @@
+{
+  "name": "Mushroom Radar",
+  "short_name": "Mushroom Radar",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f7f4ed",
+  "theme_color": "#10261f"
+}

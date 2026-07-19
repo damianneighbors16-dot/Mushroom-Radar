@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A sample mushroom-fruiting forecast map for Southwest Colorado." />
+    <meta name="theme-color" content="#10261f" />
+    <title>Mushroom Radar | Southwest Colorado</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="preconnect" href="https://unpkg.com" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="map-area" aria-label="Mushroom forecast map">
+        <div id="map" aria-label="Interactive map of Southwest Colorado"></div>
+        <header class="brand-card">
+          <p class="eyebrow">Southwest Colorado</p>
+          <h1>Mushroom Radar</h1>
+          <p>Sample fruiting forecast</p>
+        </header>
+        <button id="locate-button" class="locate-button" type="button" aria-label="Find my location">
+          <span aria-hidden="true">◎</span> My location
+        </button>
+        <p id="map-status" class="map-status" role="status"></p>
+        <div class="map-tools" aria-label="Map layers">
+          <button type="button" data-layer="slope">Slope</button>
+          <button type="button" data-layer="aspect">Aspect</button>
+          <button type="button" data-layer="hillshade">Hillshade</button>
+          <button type="button" data-layer="sightings">Sightings</button>
+        </div>
+      </section>
+
+      <aside class="forecast-panel" aria-label="Mushroom forecast details">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Weekend outlook</p>
+            <h2>Foraging forecast</h2>
+          </div>
+          <span class="sample-badge">Sample data</span>
+        </div>
+
+        <section class="activity-card" aria-label="Overall mushroom activity">
+          <p>Overall activity</p>
+          <div class="activity-score"><strong id="activity-score">68%</strong><span>promising</span></div>
+          <div class="meter" aria-hidden="true"><span id="activity-meter"></span></div>
+          <p id="activity-summary" class="muted">Recent moisture and warm nights favor higher-elevation sites.</p>
+        </section>
+
+        <section class="quick-facts" aria-label="Forecast highlights">
+          <div><span>Best species</span><strong id="best-species">King bolete</strong></div>
+          <div><span>Best elevation</span><strong id="best-elevation">8,600–10,200 ft</strong></div>
+        </section>
+
+        <section class="best-spots" aria-label="Best spots today">
+          <div class="guide-heading"><p class="eyebrow">Best spots today</p><h3>Condition-ranked zones</h3></div>
+          <ol id="best-spots-list"></ol>
+        </section>
+
+        <section class="weather-card" aria-live="polite" aria-label="Live nearby weather stations">
+          <div class="weather-heading"><div><p class="eyebrow">7-day conditions</p><h3>NOAA weather stations</h3></div><button id="refresh-weather" type="button">Refresh</button></div>
+          <p id="weather-status" class="weather-status">Loading the last seven days from regional stations…</p>
+          <div id="weather-outlook" class="weather-outlook" aria-label="Seven-day weather outlook"></div>
+          <div id="weather-stations" class="weather-stations"></div>
+        </section>
+
+        <section class="mushroom-search" aria-label="Mushroom search">
+          <label for="mushroom-query" class="eyebrow">Find a mushroom</label>
+          <input id="mushroom-query" type="search" placeholder="Search morels, chanterelles…" autocomplete="off" />
+          <p id="search-result" class="search-result">Showing all forecast zones.</p>
+        </section>
+
+        <section class="species-guide" aria-label="Mushroom habitat guide">
+          <div class="guide-heading"><p class="eyebrow">Species guide</p><h3>Habitat clues, not identification</h3></div>
+          <div id="species-guide-list" class="species-guide-list"></div>
+        </section>
+
+        <section class="community-tools" aria-label="Your mushroom notes">
+          <div class="guide-heading"><p class="eyebrow">Your finds</p><h3>Private foraging journal</h3></div>
+          <form id="find-form" class="compact-form">
+            <input id="find-species" required placeholder="Species or guess" />
+            <input id="find-place" required placeholder="General area (not exact spot)" />
+            <textarea id="find-notes" placeholder="Notes: habitat, weather, photo details"></textarea>
+            <button type="submit">Save private note</button>
+          </form>
+          <div id="journal-list" class="journal-list"></div>
+        </section>
+
+        <section class="photo-helper" aria-label="Photo helper">
+          <div class="guide-heading"><p class="eyebrow">Photo helper</p><h3>Capture checklist</h3></div>
+          <input id="mushroom-photo" type="file" accept="image/*" />
+          <p id="photo-help" class="search-result">Take clear photos of the cap, underside, stem base, and surrounding habitat. A photo alone cannot safely identify a mushroom.</p>
+        </section>
+
+        <section class="alerts-card" aria-label="Personal condition alerts">
+          <div class="guide-heading"><p class="eyebrow">Personal alert</p><h3>Good-condition reminder</h3></div>
+          <form id="alert-form" class="compact-form inline-form"><select id="alert-species"></select><input id="alert-threshold" type="number" min="20" max="95" value="75" aria-label="Minimum activity percent" /><button type="submit">Save alert</button></form>
+          <p id="alert-status" class="search-result">Saved only in this browser. Notifications are optional.</p>
+        </section>
+
+        <section class="zone-details" aria-live="polite">
+          <p class="eyebrow">Selected forecast zone</p>
+          <h3 id="zone-name">Choose a colored area</h3>
+          <p id="zone-probability" class="zone-probability">Tap a map zone to see its forecast.</p>
+          <dl id="zone-info" class="zone-info">
+            <div><dt>Species</dt><dd>—</dd></div>
+            <div><dt>Elevation</dt><dd>—</dd></div>
+            <div><dt>Habitat</dt><dd>—</dd></div>
+            <div><dt>Conditions</dt><dd>—</dd></div>
+          </dl>
+        </section>
+
+        <section class="legend" aria-label="Forecast probability legend">
+          <h3>Fruiting chance</h3>
+          <div><i class="high"></i>High <span>75–100%</span></div>
+          <div><i class="medium"></i>Possible <span>40–74%</span></div>
+          <div><i class="low"></i>Low <span>0–39%</span></div>
+        </section>
+
+        <p class="notice">Live conditions come from nearby NOAA/NWS reporting stations. Habitat clues are not identification. Follow local regulations, respect private land, and never eat a mushroom without an expert identification.</p>
+      </aside>
+    </main>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
