@@ -1,0 +1,64 @@
+{
+  "name": "Find",
+  "type": "object",
+  "properties": {
+    "species_name": {
+      "type": "string"
+    },
+    "lat": {
+      "type": "number"
+    },
+    "lng": {
+      "type": "number"
+    },
+    "found_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "quantity": {
+      "type": "number"
+    },
+    "habitat_notes": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "photo_url": {
+      "type": "string"
+    },
+    "elevation_ft": {
+      "type": "number"
+    },
+    "aspect": {
+      "type": "string"
+    },
+    "slope_deg": {
+      "type": "number"
+    },
+    "soil_temp_f": {
+      "type": "number"
+    },
+    "soil_moisture": {
+      "type": "number"
+    },
+    "rain_7d_in": {
+      "type": "number"
+    },
+    "rating_at_find": {
+      "type": "string",
+      "enum": [
+        "Excellent",
+        "Good",
+        "Fair",
+        "Poor",
+        "Unknown"
+      ],
+      "default": "Unknown"
+    }
+  },
+  "required": [
+    "lat",
+    "lng"
+  ]
+}

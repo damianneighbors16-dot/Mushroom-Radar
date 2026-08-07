@@ -1,0 +1,9 @@
+{
+  "type": "airtable",
+  "scopes": [
+    "schema.bases:read",
+    "data.records:read",
+    "data.records:write",
+    "user.email:read"
+  ]
+}

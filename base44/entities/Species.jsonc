@@ -1,0 +1,114 @@
+{
+  "name": "Species",
+  "type": "object",
+  "properties": {
+    "common_name": {
+      "type": "string"
+    },
+    "latin_name": {
+      "type": "string"
+    },
+    "emoji": {
+      "type": "string",
+      "default": "\ud83c\udf44"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "host_trees": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "forest_types": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "soil_temp_min_f": {
+      "type": "number"
+    },
+    "soil_temp_max_f": {
+      "type": "number"
+    },
+    "soil_moisture_min": {
+      "type": "number",
+      "description": "volumetric m3/m3"
+    },
+    "elevation_min_ft": {
+      "type": "number"
+    },
+    "elevation_max_ft": {
+      "type": "number"
+    },
+    "preferred_aspects": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "N",
+          "NE",
+          "E",
+          "SE",
+          "S",
+          "SW",
+          "W",
+          "NW",
+          "any"
+        ]
+      }
+    },
+    "slope_min_deg": {
+      "type": "number",
+      "default": 0
+    },
+    "slope_max_deg": {
+      "type": "number",
+      "default": 45
+    },
+    "rain_min_inches": {
+      "type": "number",
+      "description": "minimum rain over lookback window"
+    },
+    "rain_lag_days_min": {
+      "type": "number",
+      "default": 3
+    },
+    "rain_lag_days_max": {
+      "type": "number",
+      "default": 10
+    },
+    "humidity_min_pct": {
+      "type": "number",
+      "default": 70
+    },
+    "season_start_month": {
+      "type": "number"
+    },
+    "season_end_month": {
+      "type": "number"
+    },
+    "canopy_preference": {
+      "type": "string",
+      "enum": [
+        "dense",
+        "moderate",
+        "open",
+        "any"
+      ],
+      "default": "any"
+    },
+    "frost_tolerant": {
+      "type": "boolean",
+      "default": false
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "common_name"
+  ]
+}
