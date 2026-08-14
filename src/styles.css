@@ -1,0 +1,19 @@
+html,body,#root{height:100%;margin:0}
+.app-root{height:100%;display:flex;flex-direction:column}
+.topbar{height:56px;background:#0b1220;color:#fff;display:flex;align-items:center;padding:0 16px;gap:16px}
+.topbar h1{font-size:16px;margin:0}
+.map-container{flex:1}
+.map-wrap{position:relative;height:100%}
+.map{position:absolute;inset:0}
+.map-overlay{position:absolute;z-index:700}
+.map-overlay.top-right{top:12px;right:12px}
+.map-overlay.top-left{top:12px;left:12px}
+.source-buttons button{margin-right:6px;padding:8px 10px;border-radius:6px;border:0;background:#ffffffaa}
+.source-buttons button.active{background:#0ea5a4;color:#fff}
+.leaflet-container{height:100%;width:100%}
+
+/* Tabs */
+.tabs{display:flex;gap:8px}
+.tabs button{background:transparent;border:0;color:#9aa6b2;padding:8px 10px;border-radius:6px}
+.tabs button.active{background:#0ea5a4;color:#fff}
+.placeholder{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#cbd5e1}
