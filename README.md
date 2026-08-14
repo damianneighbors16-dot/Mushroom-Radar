@@ -64,7 +64,7 @@ npm start
 
 About using upstream files
 
-- You requested using files from `https://github.com/damianneighbors16-dot/Mushroom-Radar`. I can't fetch remote files from here automatically. If you want me to incorporate those files, either grant access or paste the files. Do NOT include any files that implement or route through base44 — I will skip any files containing base44 or related routing.
+- You requested using files from `https://github.com/damianneighbors16-dot/Mushroom-Radar`. I can't fetch remote files from here automatically. If you want me to incorporate those files, either grant access or paste the files.
 
 Notes about credits and usage
 
